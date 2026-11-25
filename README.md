@@ -1,64 +1,142 @@
-# 
+
 # Azure Network Security & Secure Storage Administration Lab
 
 ## Project Overview
 
-This project focuses on planning and configuring a secure Windows Server virtual machine environment using Microsoft Azure concepts.
+This project demonstrates hands-on experience configuring Microsoft Azure networking, network security, secure cloud storage, and Role-Based Access Control (RBAC).
 
-The goal is to gain hands-on experience with Azure virtual machines, virtual networks, subnets, Network Security Groups, and cloud security practices.
+The objective was to build a basic company-style cloud environment with restricted network access and secure document storage while applying cloud security best practices.
 
-## Objectives
+## Technologies Used
 
-- Understand Azure virtual machine deployment.
-- Create and configure a resource group.
-- Configure a virtual network and subnet.
-- Understand Network Security Groups (NSGs).
-- Practice securing inbound and outbound network traffic.
-- Apply basic cloud security principles.
+- Microsoft Azure
+- Azure Virtual Network (VNet)
+- Network Security Groups (NSG)
+- Azure Blob Storage
+- Azure Role-Based Access Control (RBAC)
+- Microsoft Azure Portal
 
-## Technologies & Tools
+## Architecture
 
-- Microsoft Azure concepts
-- Azure Virtual Machines
-- Windows Server 2022
-- Azure Virtual Networks (VNet)
-- Network Security Groups (NSGs)
-- Ankit CloudLab (Azure simulation environment)
+The project uses an Azure Virtual Network with a dedicated subnet and Network Security Group. An Azure Storage Account provides private document storage with restricted network access.
 
-## Lab Configuration
+## Azure Resources
 
-| Component | Configuration |
+| Resource | Configuration |
 |---|---|
-| Resource Group | rg-pilot-fileserver |
-| Virtual Machine | vm-fs01 |
-| Operating System | Windows Server 2022 |
+| Resource Group | resource-group1 |
+| Virtual Network | vnet-company |
 | Region | East US 2 |
-| Virtual Network | vnet-pilot |
 | Address Space | 10.0.0.0/16 |
-| Subnet | web |
-| Subnet Range | 10.0.1.0/24 |
+| Subnet | snet-servers |
+| Subnet Address | 10.0.1.0/24 |
+| Network Security Group | nsg-server-security |
+| Storage Account | stcloudlab707 |
+| Blob Container | company-documents |
 
-## Security Considerations
+## Network Security Configuration
 
-- Restrict unnecessary inbound network traffic.
-- Avoid exposing Remote Desktop Protocol (RDP) to the public internet.
-- Apply least-privilege access principles.
-- Use Network Security Groups to control network traffic.
-- Review security configurations before deployment.
+Created a Network Security Group to control inbound network traffic.
 
-## Screenshots
+### Inbound Security Rule
 
-Screenshots will be added as each lab step is completed.
+| Setting | Configuration |
+|---|---|
+| Rule Name | Allow-RDP-MyIP |
+| Port | 3389 |
+| Protocol | TCP |
+| Action | Allow |
+| Priority | 300 |
+| Source | Authorized public IP (/32) |
 
-## What I Learned
+The NSG was associated with the `snet-servers` subnet.
 
-This section will document the Azure administration and security concepts learned during the project.
+The inbound rule restricts RDP traffic to an authorized IP address instead of allowing access from all sources.
 
-Topics will include virtual machine deployment, network configuration, traffic filtering, and cloud security.
+## Storage Security Configuration
 
-## Project Status
+Created an Azure Storage Account with the following settings:
 
-In Progress
+- Performance: Standard
+- Redundancy: Locally Redundant Storage (LRS)
+- Secure transfer required: Enabled
+- Minimum TLS version: 1.2
+- Anonymous blob access: Disabled
+- Public network access: Enabled for selected networks and IP addresses
 
-This project is part of my preparation for the Microsoft AZ-104 and CompTIA Security+ certifications.
+### Blob Storage
+
+Created a private Blob container:
+
+`company-documents`
+
+Sample files uploaded:
+
+- `company-policy.txt`
+- `access-test.txt`
+
+The container uses private access to prevent anonymous access to stored documents.
+
+## Role-Based Access Control (RBAC)
+
+Assigned the following built-in Azure role:
+
+**Storage Blob Data Contributor**
+
+This role allows the assigned user to:
+
+- Read blob data
+- Upload and modify blobs
+- Delete blob data
+
+The role was assigned at the Storage Account scope to demonstrate data-plane access management.
+
+## Testing and Validation
+
+The following tests are included in the project:
+
+- [ ] Upload a blob
+- [ ] Download a blob
+- [ ] View blob properties
+- [ ] Verify private container access
+- [ ] Confirm authorized network access
+
+Testing results will be documented after each test is completed.
+
+## Project Screenshots
+
+Screenshots documenting the project are stored in the `screenshots` folder.
+
+| Screenshot | Description |
+|---|---|
+| 01 | Resource Group |
+| 02 | Virtual Network Overview |
+| 03 | Virtual Network Subnets |
+| 04 | Network Security Group |
+| 05 | NSG Subnet Association |
+| 06 | NSG Inbound Rules |
+| 07 | Storage Account Overview |
+| 08 | Storage Networking Configuration |
+| 09 | Blob Storage Access Testing |
+
+## Skills Demonstrated
+
+- Azure resource administration
+- Virtual network configuration
+- Subnet management
+- Network Security Group configuration
+- Inbound traffic filtering
+- Azure Blob Storage administration
+- Storage network restrictions
+- Role-Based Access Control (RBAC)
+- Cloud security fundamentals
+- Technical documentation
+
+## Project Goal
+
+This project was developed as part of my preparation for the Microsoft Azure Administrator (AZ-104) certification.
+
+It provides practical experience with Azure networking, storage administration, access control, and cloud security concepts relevant to entry-level IT support, networking, and cloud administration roles.
+
+
 

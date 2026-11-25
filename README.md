@@ -1,5 +1,5 @@
 # 
-# Azure Virtual Machine & Network Security Lab
+# Azure Network Security & Secure Storage Administration Lab
 
 ## Project Overview
 

@@ -28,7 +28,7 @@ I have an educational background in computer networking and cybersecurity, along
 
 ## Projects & Hands-On Labs
 
-### 1. Azure Virtual Machine & Network Security Lab
+### 1. Azure Network Security Secure Storage Lab
 - Deploy and configure an Azure virtual machine
 - Configure virtual networks and subnets
 - Apply Network Security Groups
